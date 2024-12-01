@@ -29,28 +29,42 @@ public class EmployeeServiceTest {
 
     @Test
     void findAll() {
+        //given
+        //when
         Collection<Employee> actual = employeeService.getAll();
+
+        //then
         assertEquals(2, actual.size());
     }
 
     @Test
     void find() {
+        //given
+        //when
         Employee actual = employeeService.find("Ivan", "Ivanov");
+
+        //then
         assertEquals("Ivan", actual.getFirstName());
         assertEquals("Ivanov", actual.getLastName());
     }
 
     @Test
     void find_negative() {
+        //given
+        //when
+        //then
         assertThrows(EmployeeNotFoundException.class, () -> {
-            employeeService.find("Nikolai", "Sergeerv");
+            employeeService.find("Nikolai", "Sergeev");
         });
     }
 
     @Test
-    void remove (){
+    void remove() {
+        //given
+        //when
         int size = employeeService.getAll().size();
         employeeService.remove("Ivan", "Ivanov");
-        assertEquals(size -1, employeeService.getAll().size());
+        //then
+        assertEquals(size - 1, employeeService.getAll().size());
     }
 }

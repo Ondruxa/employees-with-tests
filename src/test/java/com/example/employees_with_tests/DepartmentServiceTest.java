@@ -41,48 +41,73 @@ public class DepartmentServiceTest {
     @Test
     void sum() {
         double actual = departmentService.getEmployeeSalarySum(1);
-        assertEquals(470000,actual);
+        assertEquals(470000, actual);
     }
 
     @Test
     void min() {
+        //given
+        //when
         double actual = departmentService.getEmpWithMinSalary(1);
-        assertEquals(100000,actual);
+
+        //then
+        assertEquals(100000, actual);
     }
 
     @Test
     void min_negative() {
+        //given
+        //when
+        //then
         assertThrows(EmployeeNotFoundException.class, () -> departmentService.getEmpWithMinSalary(3));
     }
 
     @Test
     void max() {
+        //given
+        //when
         double actual = departmentService.getEmpWithMaxSalary(2);
-        assertEquals(200000,actual);
+        //then
+        assertEquals(200000, actual);
     }
 
     @Test
     void max_negative() {
+        //given
+        //when
+        //then
         assertThrows(EmployeeNotFoundException.class, () -> departmentService.getEmpWithMaxSalary(3));
     }
 
     @Test
     void filter() {
+        //given
+        //when
         List<Employee> actual = departmentService.getAll(1);
-        assertEquals(3,actual.size());
+
+        //then
+        assertEquals(3, actual.size());
         actual.forEach(employee -> assertEquals(1, employee.getDepartment()));
     }
 
     @Test
     void filter_negative() {
+        //given
+        //when
         List<Employee> actual = departmentService.getAll(3);
+
+        //then
         assertTrue(actual.isEmpty());
 
     }
 
     @Test
     void grouped() {
+        //given
+        //when
         Map<Integer, List<Employee>> actual = departmentService.getAll();
+
+        //then
         assertEquals(2, actual.keySet().size());
         for (Map.Entry<Integer, List<Employee>> entry : actual.entrySet()) {
             Integer department = entry.getKey();
@@ -93,6 +118,9 @@ public class DepartmentServiceTest {
 
     @Test
     void remove_in_department() {
+        //given
+        //when
+        //then
         departmentService.fireAllInDepartment(1);
         verify(employeeService, times(3)).remove(ArgumentMatchers.anyString(), ArgumentMatchers.anyString());
     }
